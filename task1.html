@@ -1,0 +1,134 @@
+<html>
+<head>
+<title>CaloryMart</title>
+<style>table{background-color:darksalmon}
+body{background-image:url(a3.png);
+background-size: cover;
+background-attachment: fixed;
+}
+.content{
+   background: whitesmoke;
+   width: 50%;
+   padding: 40px;
+   margin: 100px auto;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+p{
+   font-size: 25px;
+   color: black;
+}
+
+</style>
+</head>
+<body><center>
+   <div class="content">
+   <b>NAME</b>:<input type="text" id="name"><br>
+   <b>AGE</b>: <input type="text" id="age"><br>
+   <b>SELECT GENDER</b>:<br><input type="radio" id="r1"name="gender" value="MALE">MALE</input><br>
+   <input type="radio" name="gender" id="r2" value="FEMALE">FEMALE</input><br>
+   <b>HEIGHT</b>(in m): <input type="text" id="height"><br>
+   <b>WEIGHT</b>(in kgs): <input type="text" id="weight"><br>
+   </div>
+   <div class="Content">
+   <p>
+   <b>SELECT DAILY ACTIVITY TYPE</b>:<br>
+   <input type="radio" id="pa1" class="pa" value="Sedentary">Sedentary</input><br>
+   <input type="radio" id="pa2" class="pa" value="Low active">Low active</input><br>
+   <input type="radio" id="pa3" class="pa" value="Active">Active</input><br>
+   <input type="radio" id="pa4" class="pa" value="Very active">Very active</input><br>
+   <button onclick="creq()">CLICK TO GET CALORIES REQUIRED</button> <br>
+   </p>
+</div>
+   <br>
+   
+   <div class="content">
+   <table id="table" align="center" border=3>
+      <thead ><b>FOOD ITEMS CONSUMED WITH CONTENTS:-</b></thead>
+      <br>
+      <form onsubmit="foodtable(); return false;">
+           <input type="number" placeholder="Enter serial number" id="sno" min="1"><br>
+           <input type="text" placeholder="Enter Food Item" id="fitem"><br>
+           <input type="text"  id="ccontent" placeholder="Enter Calories Content"><br>
+            <input type="text"  id="fcontent" placeholder="Enter Fat Content"><br>
+            <input type="text"  id="carbscontent" placeholder="Enter Carbohydrates Content"><br>
+           <input type="submit" value="CLICK TO ADD IN TABLE">
+      <tr>
+         <td align="center"><b> S.no.</b></td>
+         <td align="center"><b>Food Item</b></td>  
+         <td align="center"><b>Calories Content</b></td>  
+         <td align="center"><b>Fat Content</b></td>
+         <td align="center"><b>Carbs Content</b></td>    
+      </tr>
+   </table>
+   <thead><b>body mass index</b></thead>
+   <br>
+   </div>
+   <form onsubmit="bmi();return false;"></form>
+   
+    <br>
+   </center>
+</body>
+<script> 
+     function creq()
+   { 
+      var age=document.getElementById("age").value;
+    var height=document.getElementById("height").value;
+    var weight=document.getElementById("weight").value;
+    var r1=document.getElementById("r1");
+    var r2=document.getElementById("r2");
+    if(r1.checked==true)
+    var g=document.getElementById("r1").value;
+    else
+   var g=document.getElementById("r2").value; 
+   var pa=document.getElementsByClassName("pa");
+   for(var i=0;i<pa.length;i++)
+   {
+      if(pa[i].checked==true)
+      {
+       var Pa=pa[i].value;
+       break;
+       }
+   }
+   var calreq;  
+    if(g=="MALE" && Pa=="Sedentary")
+    calreq=((864)-(9.72*age)+(1*((14.2*weight)+(660.7*height)))); 
+    else if(g=="MALE" && Pa== "Low active")
+    calreq=((864)-(9.72*age)+(1.12*((14.2*weight)+(660.7*height))));
+    else if(g=="MALE" && Pa=="Active")
+    calreq=((864)-(9.72*age)+(1.27*((14.2*weight)+(660.7*height))));
+    else if(g=="MALE" && Pa=="Very active")
+    calreq=((864)-(9.72*age)+(1.54*((14.2*weight)+(660.7*height))));
+    else if(g=="FEMALE" && Pa=="Sedentary")
+    calreq=((387)-(7.31*age)+(1*((10.9*weight)+(660.7*height))));
+    else if(g=="FEMALE" && Pa=="Low active")
+    calreq=((387)-(7.31*age)+(1.14*((10.9*weight)+(660.7*height))));
+    else if(g=="FEMALE" && Pa=="Active")
+    calreq=((387)-(7.31*age)+(1.27*((10.9*weight)+(660.7*height))));
+    else
+   calreq=((387)-(7.31*age)+(1.45*((14.2*weight)+(660.7*height)))); 
+   alert("CALORIES REQUIRED ARE:"+calreq);
+    }
+    function foodtable()
+    {
+      var table=document.getElementById("table");
+      var row=table.insertRow();
+      var cell1=row.insertCell();
+      var cell2=row.insertCell();
+      var cell3=row.insertCell();
+      var cell4=row.insertCell();
+      var cell5=row.insertCell();
+      cell1.innerHTML=document.getElementById("sno").value;
+      cell2.innerHTML=document.getElementById("fitem").value;
+      cell3.innerHTML=document.getElementById("ccontent").value;
+      cell4.innerHTML=document.getElementById("fcontent").value;
+      cell5.innerHTML=document.getElementById("carbscontent").value;
+    }
+    function bmi()
+    {
+       var height=document.getElementById("height").value;
+       var weight=document.getElementById("weight").value;
+    }
+    var bmi;
+    bmi=[weight/height/height]*703;
+    </script>
+</html>
